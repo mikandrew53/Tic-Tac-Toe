@@ -1,1 +1,101 @@
-/* You can add global styles to this file, and also import other style files */
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+$cell-size: 100px;
+$mark-size: calc($cell-size * 0.9);
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #fff;
+    border: 1px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell.x,
+.cell.circle {
+    cursor: default;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+    border-right: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9){
+    border-bottom: none;
+}
+
+.cell.x::before, 
+.cell.x::after, 
+.board.x .cell:not(.x):not(.circle):hover:before, 
+.board.x .cell:not(.x):not(.circle):hover::after { 
+    background-color: #000;
+    content: '';
+    width: calc($mark-size * 0.15);
+    height: $mark-size;
+    position: absolute;
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover:before {
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover:before {
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before, 
+.cell.circle::after {
+    content: '';
+    background-color: #000;
+    width: $mark-size;
+    height: $mark-size;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.cell.circle::after { 
+    width: calc($mark-size * 0.7);
+    height: calc($mark-size * 0.7);
+    background-color: #fff;
+}
+
+
+
+
+
+
+
