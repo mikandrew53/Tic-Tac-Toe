@@ -24,8 +24,6 @@ export class AppComponent implements OnInit{
   }
 
   initializeBoard() {
-    this.board = [];
-    this.htmlBoard = [];
     for(let i = 0; i < 3; i++){
       const row: Array<Cell> = [];  
       for (let j = 0; j < 3; j++){
@@ -58,15 +56,11 @@ export class AppComponent implements OnInit{
   }
 
   checkForWin(cell:Cell, i: number): boolean {
-    let win: boolean = false;
+    if (this.checkRowForWin(i, cell))
+      return true;
     
-    win = this.checkRowForWin(i, cell);
-    if (win)
-      return win
-    
-    win = this.checkColForWin(i, cell);
-    if (win)
-      return win
+    if (this.checkColForWin(i, cell))
+      return true
 
     return (this.checkRightDiagonal(cell) || this.checkLeftDiagonal(cell))
   }
@@ -110,6 +104,7 @@ export class AppComponent implements OnInit{
       this.board[2][2].isCircle === cell.isCircle 
     )
   }
+
   checkLeftDiagonal(cell: Cell): boolean {
     return (
       this.board[0][2].isCircle === cell.isCircle &&
@@ -133,17 +128,13 @@ export class AppComponent implements OnInit{
     return !isThereEmptyCell;
   }
 
-
-
   restart() {
+    this.board = [];
+    this.htmlBoard = [];
     this.initializeBoard();
+    
     this.circleIsNextMove = false;
     this.gameOver = false;
   }
-
-
   
 }
-
-
-
