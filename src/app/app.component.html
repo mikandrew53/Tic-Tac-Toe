@@ -1,17 +1,14 @@
-<div class="board x" #board>
-  <!-- <div class="cell" *ngFor="let cell of cells"></div> -->
-  <div class="cell x"></div>
-  <div class="cell circle"></div>
-  <div class="cell"></div>
-  <div class="cell"></div>
-  <div class="cell"></div>
-  <div class="cell"></div>
-  <div class="cell"></div>
-  <div class="cell"></div>
-  <div class="cell"></div>
+<div 
+class="board" 
+[ngClass]="{'x': !circleIsNextMove, 'circle': circleIsNextMove }">
+  <div 
+  *ngFor="let cell of htmlBoard; let i = index" 
+  class="cell" 
+  [ngClass]="{'x': cell.isCircle === false, 'circle': cell.isCircle === true}" (click)="onCellClick(cell, i)">
+</div>
 </div>
 
-<div class="winning-message" #winningMessage>
-  <div class="data-winning-message-text"></div>
-  <button #restartButton>Restart</button>
+<div class="winning-message" [ngClass]="{'show': gameOver}">
+  <div class="data-winning-message-text">{{ winningMessage }}</div>
+  <button #restartButton class="btn"(click)="restart()">Restart</button>
 </div>
