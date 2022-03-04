@@ -8,22 +8,150 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule
       ],
-      declarations: [
-        AppComponent
-      ],
+      declarations: [ AppComponent ],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  /* 
+  [
+    0 1 2
+    3 4 5
+    6 7 8
+  ]
+
+  [
+    [ 0 1 2 ],
+    [ 0 1 2 ],
+    [ 0 1 2 ],
+  ]
+*/
+
+  it('x win on left diagonal', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    app.initializeBoard();
+    // X
+    app.onCellClick(app.htmlBoard[0], 0);
+    // O
+    app.onCellClick(app.htmlBoard[1], 1);
+    // X
+    app.onCellClick(app.htmlBoard[4], 4);
+    // O
+    app.onCellClick(app.htmlBoard[2], 2);
+    // X 
+    app.onCellClick(app.htmlBoard[8], 8);
+
+    expect(app.gameOver).toBeTruthy();
+    expect(app.winningMessage).toBe(app.xWinningMessage);
   });
 
-  it('should render title', () => {
+  it('x win on right diagonal', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Tic-Tac-Toe app is running!');
+    const app = fixture.componentInstance;
+    app.initializeBoard();
+    // X
+    app.onCellClick(app.htmlBoard[2], 2);
+    // O
+    app.onCellClick(app.htmlBoard[1], 1);
+    // X
+    app.onCellClick(app.htmlBoard[4], 4);
+    // O
+    app.onCellClick(app.htmlBoard[0], 0);
+    // X 
+    app.onCellClick(app.htmlBoard[6], 6);
+
+    expect(app.gameOver).toBeTruthy();
+    expect(app.winningMessage).toBe(app.xWinningMessage);
   });
+
+  it('O win on middle column', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.initializeBoard();
+    // X
+    app.onCellClick(app.htmlBoard[0], 0);
+    // O
+    app.onCellClick(app.htmlBoard[1], 1);
+    // X
+    app.onCellClick(app.htmlBoard[3], 3);
+    // O
+    app.onCellClick(app.htmlBoard[4], 4);
+    // X 
+    app.onCellClick(app.htmlBoard[8], 8);
+    // O
+    app.onCellClick(app.htmlBoard[7], 7);
+
+    expect(app.gameOver).toBeTruthy();
+    expect(app.winningMessage).toBe(app.circleWinningMessage);
+  });
+
+  it('X win on middle row', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.initializeBoard();
+    // X
+    app.onCellClick(app.htmlBoard[3], 3);
+    // O
+    app.onCellClick(app.htmlBoard[1], 1);
+    // X
+    app.onCellClick(app.htmlBoard[4], 4);
+    // O
+    app.onCellClick(app.htmlBoard[2], 2);
+    // X 
+    app.onCellClick(app.htmlBoard[5], 5);
+    
+    expect(app.gameOver).toBeTruthy();
+    expect(app.winningMessage).toBe(app.xWinningMessage);
+  });
+
+  it('O win on middle row', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.initializeBoard();
+    // X
+    app.onCellClick(app.htmlBoard[1], 1);
+    // O
+    app.onCellClick(app.htmlBoard[3], 3);
+    // X
+    app.onCellClick(app.htmlBoard[2], 2);
+    // O
+    app.onCellClick(app.htmlBoard[4], 4);
+    // X 
+    app.onCellClick(app.htmlBoard[6], 6);
+    // O 
+    app.onCellClick(app.htmlBoard[5], 5);
+    
+    expect(app.gameOver).toBeTruthy();
+    expect(app.winningMessage).toBe(app.circleWinningMessage);
+  });
+  
+  it('Draw', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.initializeBoard();
+
+    // X
+    app.onCellClick(app.htmlBoard[4], 4);
+    // O
+    app.onCellClick(app.htmlBoard[0], 0);
+    // X
+    app.onCellClick(app.htmlBoard[2], 2);
+    // O
+    app.onCellClick(app.htmlBoard[6], 6);
+    // X 
+    app.onCellClick(app.htmlBoard[3], 3);
+    // O 
+    app.onCellClick(app.htmlBoard[5], 5);
+    // X
+    app.onCellClick(app.htmlBoard[1], 1);
+    // O
+    app.onCellClick(app.htmlBoard[7], 7);
+    // X
+    app.onCellClick(app.htmlBoard[8], 8);
+
+    expect(app.gameOver).toBeTruthy();
+    expect(app.winningMessage).toBe(app.drawWinningMessage);
+  });
+
+
 });

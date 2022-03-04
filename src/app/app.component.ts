@@ -49,7 +49,6 @@ export class AppComponent implements OnInit{
     }
   }
   
-  
   markCell(cell: Cell) {
     cell.isCircle = this.circleIsNextMove ? true : false;
     this.circleIsNextMove = !this.circleIsNextMove;
@@ -132,7 +131,6 @@ export class AppComponent implements OnInit{
     this.board = [];
     this.htmlBoard = [];
     this.initializeBoard();
-    
     this.circleIsNextMove = false;
     this.gameOver = false;
   }
