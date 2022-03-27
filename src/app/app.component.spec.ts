@@ -12,21 +12,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  /* 
-  [
-    0 1 2
-    3 4 5
-    6 7 8
-  ]
-
-  [
-    [ 0 1 2 ],
-    [ 0 1 2 ],
-    [ 0 1 2 ],
-  ]
-*/
-
-  it('x win on left diagonal', () => {
+  it('X win on left diagonal', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     app.initializeBoard();
@@ -45,7 +31,7 @@ describe('AppComponent', () => {
     expect(app.winningMessage).toBe(app.xWinningMessage);
   });
 
-  it('x win on right diagonal', () => {
+  it('X win on right diagonal', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     app.initializeBoard();
